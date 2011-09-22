@@ -15,7 +15,7 @@ Requirements
 
 * [Node](http://nodejs.org/)
 * [jasmine-node](https://github.com/mhevery/jasmine-node)
-* [Ruby](http://ruby-lang.org)
+* [Ruby](http://ruby-lang.org) and rubygems
 
 Install
 -------
@@ -65,6 +65,7 @@ Development
 
 * Source hosted at [GitHub](https://github.com/kapoq/guard-jasmine-node)
 * Report issues/Questions/Feature requests on [GitHub Issues](https://github.com/kapoq/guard-jasmine-node/issues)
+* CI at [Travis](http://travis-ci.org/#!/textgoeshere/guard-jasmine-node)
 
 Pull requests are very welcome! Make sure your patches are well tested. Please create a topic branch for every separate change
 you make.
@@ -72,7 +73,7 @@ you make.
 Testing
 -------
 
-  $ rake
+    $ rake
 
 Author
 ------
