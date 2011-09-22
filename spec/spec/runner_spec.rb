@@ -12,6 +12,11 @@ describe Guard::JasmineNode::Runner do
 
     context "when passed paths" do
       let(:some_paths) { %w(/foo/bar /zip/zap) }
+
+      it "executes jasmine node" do
+        runner.should_receive(:system).with(/__EXECUTABLE__/)
+        runner.run(some_paths, :jasmine_node_bin => "__EXECUTABLE__")
+      end
       
       context "when message option is given" do
         it "outputs message" do

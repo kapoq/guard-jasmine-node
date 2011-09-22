@@ -22,7 +22,7 @@ module Guard
     end
 
     def run_all
-      outcome = Runner.run(["spec"], { :message => "Running all specs" })
+      outcome = Runner.run(["spec"], options.merge(:message => "Running all specs"))
       set_pass_state(outcome)
     end
 
@@ -33,7 +33,7 @@ module Guard
                     changed_paths
                   end
 
-      outcome = Runner.run(run_paths)
+      outcome = Runner.run(run_paths, options)
       set_pass_state(outcome, run_paths)
       
       if passing?

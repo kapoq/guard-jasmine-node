@@ -76,12 +76,6 @@ describe Guard::JasmineNode do
     end
   end
 
-  describe "#reload" do
-  end
-
-  describe "#stop" do
-  end
-
   describe "#run_all" do
     it "runs the runner with the spec dir" do
       runner.should_receive(:run).with(["spec"], anything)
@@ -90,6 +84,13 @@ describe Guard::JasmineNode do
 
     it "tells the message to the runner" do
       runner.should_receive(:run).with(anything, hash_including(:message => "Running all specs"))
+      guard.run_all
+    end
+
+    it "passes the options on to the runner" do
+      an_option = { :option => "value" }
+      guard.options.update(an_option)
+      runner.should_receive(:run).with(anything, hash_including(an_option))
       guard.run_all
     end
 
@@ -129,8 +130,15 @@ describe Guard::JasmineNode do
 
   describe "#run_on_change" do
     it "runs the runner with paths" do
-      runner.should_receive(:run).with(["/a/path"])
+      runner.should_receive(:run).with(["/a/path"], anything)
       guard.run_on_change(["/a/path"])
+    end
+
+    it "passes options through to the runner" do
+      an_option = { :option => "value" }
+      guard.options.update(an_option)
+      runner.should_receive(:run).with(anything, hash_including(an_option))
+      guard.run_on_change
     end
 
     context "when specs pass" do
@@ -194,7 +202,7 @@ describe Guard::JasmineNode do
         end
 
         it "runs the runner failing paths and the changed paths" do
-          runner.should_receive(:run).with(all_paths)
+          runner.should_receive(:run).with(all_paths, anything)
           guard.run_on_change(changed_paths)
         end
       end
@@ -205,7 +213,7 @@ describe Guard::JasmineNode do
         end
 
         it "runs the runner with only the changed paths" do
-          runner.should_receive(:run).with(changed_paths)
+          runner.should_receive(:run).with(changed_paths, anything)
           guard.run_on_change(changed_paths)
         end
       end
