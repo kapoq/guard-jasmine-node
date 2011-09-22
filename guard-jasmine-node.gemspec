@@ -4,7 +4,7 @@ require "guard/jasmine_node/version"
 
 Gem::Specification.new do |s|
   s.name        = "guard-jasmine-node"
-  s.version     = Guard::JasmineNode::VERSION
+  s.version     = Guard::JasmineNodeVersion::VERSION
   s.authors     = ["dave@kapoq.com"]
   s.email       = ["dave@kapoq.com"]
   s.homepage    = "https://github.com/kapoq/guard-jasmine-node"
@@ -17,6 +17,10 @@ Gem::Specification.new do |s|
   
   s.add_development_dependency "rspec"
   s.add_development_dependency "guard-rspec"
+  if RUBY_PLATFORM =~ /linux/
+    s.add_development_dependency "rb-inotify"
+    s.add_development_dependency "libnotify"
+  end
   
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

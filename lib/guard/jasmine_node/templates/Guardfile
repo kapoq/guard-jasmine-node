@@ -1,0 +1,5 @@
+guard "JasmineNode" do
+  watch(%r{^spec/.+_spec\.js$})
+  watch(%r{^lib/(.+)\.js$})     { |m| "spec/lib/#{m[1]}_spec.js" }
+  watch('spec/spec_helper.js')  { "spec" }
+end
