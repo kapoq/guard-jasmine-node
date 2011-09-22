@@ -7,7 +7,6 @@ jasmine node specs when files are modified.
 It works brilliantly with Node projects whereas [guard-jasmine](https://github.com/netzpirat/guard-jasmine)
 looks better for jasmine specs in the context of e.g. a Rails app.
 
-* Compatible with RSpec 1.x & RSpec 2.x (>= 2.4 needed for the notification feature)
 * Tested against Node 0.4, jasmine-node 1.0.10
 
 Requirements
