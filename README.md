@@ -1,4 +1,4 @@
-Guard::JasmineNode ![travis-ci](https://travis-ci.org/textgoeshere/guard-jasmine-node.png)
+Guard::JasmineNode ![travis-ci](https://secure.travis-ci.org/textgoeshere/guard-jasmine-node.png)
 ==================
 
 JasmineNode guard allows to automatically & intelligently execute
