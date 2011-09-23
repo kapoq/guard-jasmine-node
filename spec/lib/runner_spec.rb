@@ -17,9 +17,14 @@ describe Guard::JasmineNode::Runner do
     context "when passed paths" do
       let(:some_paths) { %w(/foo/bar /zip/zap) }
 
-      it "executes jasmine node with the paths" do
-        Open3.should_receive(:popen3).with(/__EXECUTABLE__ #{some_paths}/)
+      it "executes jasmine node" do
+        Open3.should_receive(:popen3).with(/__EXECUTABLE__/)
         runner.run(some_paths, :jasmine_node_bin => "__EXECUTABLE__")
+      end
+
+      it "passes the paths to the executable" do
+        Open3.should_receive(:popen3).with(/#{some_paths.join(" ")}/)
+        runner.run(some_paths)
       end
 
       context "and coffeescript option is true" do
