@@ -7,14 +7,18 @@ module Guard
       :jasmine_node_bin => "jasmine-node",
       :all_after_pass   => true,
       :all_on_start     => true,
-      :keep_failed      => true
+      :keep_failed      => true,
+      :notify           => true
     }
-
-    autoload :Runner, "guard/jasmine_node/runner"
     
+    PATHS_FOR_ALL_SPECS = %w(spec)
+
+    autoload :Runner,    "guard/jasmine_node/runner"
+    autoload :SpecState, "guard/jasmine_node/spec_state"
+
     def initialize(watchers = [], options = {})
       super(watchers, DEFAULT_OPTIONS.merge(options))
-      clear_pass_state
+      @state = SpecState.new
     end
 
     def start
@@ -22,8 +26,8 @@ module Guard
     end
 
     def run_all
-      outcome = Runner.run(["spec"], options.merge(:message => "Running all specs"))
-      set_pass_state(outcome)
+      run(PATHS_FOR_ALL_SPECS)
+      notify(:all)
     end
 
     def run_on_change(changed_paths = [])
@@ -33,38 +37,44 @@ module Guard
                     changed_paths
                   end
 
-      outcome = Runner.run(run_paths, options)
-      set_pass_state(outcome, run_paths)
-      
-      if passing?
-        run_all if options[:all_after_pass]
-      end
-    end
+      run(run_paths)
+      notify(:some)
 
-    def passing?
-      @passing
+      run_all if passing? and options[:all_after_pass]
     end
 
     def failing_paths
-      @failing_paths
+      @state.failing_paths
+     end
+
+    def passing?
+      @state.passing?
+    end
+
+    def fixed?
+      @state.fixed?
     end
 
     private
 
-    def clear_pass_state
-      @passing       = true
-      @failing_paths = []
+    def run(run_paths = [], runner_options = {}, notifications = {})
+      @state.update(run_paths, options.merge(runner_options))
     end
-    
-    def set_pass_state(passed, run_paths = [])
-      @passing = passed
-      if run_paths.any?
-        @failing_paths = if passing?
-                           @failing_paths - run_paths
-                         else
-                           @failing_paths && run_paths
-                         end
-      end
+
+    def notify(scope = :all)
+      return unless options[:notify]
+      
+      message = if passing?
+                  if fixed?
+                    scope == :all ? "All fixed" : "Specs fixed"
+                  else
+                    scope == :all ? "All specs pass" : "Specs pass"
+                  end
+                else
+                  "Some specs failing"
+                end
+      image = passing? ? :success : :failed
+      ::Guard::Notifier.notify(message, :image => image, :title => "jasmine-node")
     end
   end
 end
