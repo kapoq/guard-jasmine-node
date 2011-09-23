@@ -35,6 +35,10 @@ describe Guard::JasmineNode do
       it "sets :coffescript option to true" do
         guard.options[:coffeescript].should be_true
       end
+      
+      it "sets :verbose option to true" do
+        guard.options[:verbose].should be_true
+      end
 
       it "is passing" do
         guard.should be_passing
@@ -53,7 +57,8 @@ describe Guard::JasmineNode do
                                               :all_after_pass   => false,
                                               :keep_failed      => false,
                                               :notify           => false,
-                                              :coffeescript     => false
+                                              :coffeescript     => false,
+                                              :verbose          => false
                                             }) }
 
       it "sets the path to jasmine-node bin" do
@@ -78,6 +83,10 @@ describe Guard::JasmineNode do
 
       it "sets the :coffeescript option" do
         guard.options[:coffeescript].should be_false
+      end
+      
+      it "sets the :verbose option" do
+        guard.options[:verbose].should be_false
       end
     end
   end
