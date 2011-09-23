@@ -1,8 +1,7 @@
 Guard::JasmineNode ![travis-ci](https://secure.travis-ci.org/textgoeshere/guard-jasmine-node.png)
 ==================
 
-JasmineNode guard allows to automatically & intelligently execute
-jasmine node specs when files are modified.
+JasmineNode guard automatically & intelligently executes jasmine node specs when files are modified.
 
 It works brilliantly with Node projects whereas [guard-jasmine](https://github.com/netzpirat/guard-jasmine)
 looks better for jasmine specs in the context of e.g. a Rails app.
@@ -38,18 +37,43 @@ change. It's worth checking out [the docs](https://github.com/guard/guard#readme
 Options
 -------
 
-guard-jasmine-node allows you to specify the path to the jasmine-node
-binary that will execute your specs.
+* `:all_on_start     # default => true`
 
-Just change the `:jasmine_node_bin` option in your Guardfile.
+Run all the specs as soon as Guard is started.
 
-The default `:jasmine_node_bin` assumes:
+* `:all_after_pass   # default => true`
+
+When files are modified and the specs covering the modified files
+pass, run all the specs automatically.
+
+* `:keep_failed      # default => true`
+
+When files are modified, run failing specs as well as specs covering
+the modified files.
+
+* `:notify           # default => true` 
+
+Display growl/libnotify notifications.
+
+* `:coffeescript     # default => true`
+
+Load coffeescript and all execution of .coffee files.
+
+* `:jasmine_node_bin`
+
+Specify the path to the jasmine-node binary that will execute your specs.
+
+The default `:jasmine_node_bin` in the Guardfile assumes:
 
 * you are running guard from the root of the project
 * you installed jasmine-node using npm
 * you installed jasmine-node locally to node_modules
 
-For more information, please read the [guard docs](https://github.com/guard/guard#readme)
+If you delete the option completely from the Guardfile, it assumes the
+jasmine-node binary is already in your `$PATH`.
+
+So if you have installed jasmine-node globally using e.g. `npm install
+-g jasmine-node`, remove the `:jasmine_node_bin` option from the Guardfile.
 
 Guardfile
 ---------
@@ -68,6 +92,14 @@ Development
 
 Pull requests are very welcome! Make sure your patches are well tested. Please create a topic branch for every separate change
 you make.
+
+TODO
+----
+
+* write a JsonFormatter for jasmine-node so we have finer-grained
+  control over rendering output
+* write an RSpec-style progress formatter (aka lots of green dots)
+* patch Guard to locate CamelCased modules correctly
 
 Testing
 -------
