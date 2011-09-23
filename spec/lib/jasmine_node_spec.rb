@@ -32,6 +32,10 @@ describe Guard::JasmineNode do
         guard.options[:keep_failed].should be_true
       end
 
+      it "sets :coffescript option to true" do
+        guard.options[:coffeescript].should be_true
+      end
+
       it "is passing" do
         guard.should be_passing
       end
@@ -48,7 +52,8 @@ describe Guard::JasmineNode do
                                               :all_on_start     => false,
                                               :all_after_pass   => false,
                                               :keep_failed      => false,
-                                              :notify           => false
+                                              :notify           => false,
+                                              :coffeescript     => false
                                             }) }
 
       it "sets the path to jasmine-node bin" do
@@ -69,6 +74,10 @@ describe Guard::JasmineNode do
       
       it "sets the :keep_failed option" do
         guard.options[:keep_failed].should be_false
+      end
+
+      it "sets the :coffeescript option" do
+        guard.options[:coffeescript].should be_false
       end
     end
   end
@@ -103,9 +112,18 @@ describe Guard::JasmineNode do
       state.should_receive(:update).with(anything, hash_including(an_option))
       guard.run_all
     end
+
+    it "notifies the user with the outcome of running all specs" do
+      guard.should_receive(:notify).with(:all)
+      guard.run_all
+    end
   end
 
   describe "#run_on_change" do
+    before do
+      guard.options[:all_after_pass] = false
+    end
+    
     it "updates the state with paths" do
       state.should_receive(:update).with(["/a/path"], anything)
       guard.run_on_change(["/a/path"])
@@ -115,7 +133,11 @@ describe Guard::JasmineNode do
       an_option = { :option => "value" }
       guard.options.update(an_option)
       state.should_receive(:update).with(anything, hash_including(an_option))
-      guard.options[:all_after_pass] = false
+      guard.run_on_change
+    end
+
+    it "notifies the user with the outcome of running the specs" do
+      guard.should_receive(:notify).with(:some)
       guard.run_on_change
     end
 

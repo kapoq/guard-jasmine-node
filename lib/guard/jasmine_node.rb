@@ -8,7 +8,8 @@ module Guard
       :all_after_pass   => true,
       :all_on_start     => true,
       :keep_failed      => true,
-      :notify           => true
+      :notify           => true,
+      :coffeescript     => true
     }
     
     PATHS_FOR_ALL_SPECS = %w(spec)

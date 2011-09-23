@@ -31,7 +31,7 @@ module Guard
       end
 
       def self.command_line_options
-        #"--coffee" if @options[:coffeescript]
+        "--coffee" if @options[:coffeescript]
       end
     end
   end

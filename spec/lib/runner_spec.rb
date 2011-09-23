@@ -22,6 +22,20 @@ describe Guard::JasmineNode::Runner do
         runner.run(some_paths, :jasmine_node_bin => "__EXECUTABLE__")
       end
 
+      context "and coffeescript option is true" do
+        it "passes the --coffee option to jasmine node" do
+          Open3.should_receive(:popen3).with(/--coffee/)
+          runner.run(some_paths, :coffeescript => true)
+        end
+      end
+
+      context "and coffeescript option is false" do
+        it "does not pass the --coffee option to jasmine node" do
+          Open3.should_not_receive(:popen3).with(/--coffee/)
+          runner.run(some_paths, :coffeescript => false)
+        end
+      end
+
       it "returns IO object" do
         io_obj = double("io obj")
         Open3.stub(:popen3 => io_obj)
@@ -36,9 +50,18 @@ describe Guard::JasmineNode::Runner do
       end
 
       context "when no message option is given" do
-        it "outputs default message" do
-          Guard::UI.should_receive(:info).with("Running: /foo/bar /zip/zap", anything)
-          runner.run(some_paths)
+        context "and running all specs" do
+          it "outputs message confirming all specs are being run" do
+            Guard::UI.should_receive(:info).with("Running all specs", anything)
+            runner.run(Guard::JasmineNode::PATHS_FOR_ALL_SPECS)
+          end
+        end
+
+        context "and running some specs" do
+          it "outputs paths of specs being run" do
+            Guard::UI.should_receive(:info).with("Running: /foo/bar /zip/zap", anything)
+            runner.run(some_paths)
+          end
         end
       end
     end
