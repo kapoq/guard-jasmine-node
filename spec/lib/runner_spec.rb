@@ -40,6 +40,20 @@ describe Guard::JasmineNode::Runner do
           runner.run(some_paths, :coffeescript => false)
         end
       end
+      
+      context "and verbose option is true" do
+        it "passes the --verbose option to jasmine node" do
+          Open3.should_receive(:popen3).with(/--verbose/)
+          runner.run(some_paths, :verbose => true)
+        end
+      end
+      
+      context "and verbose option is false" do
+        it "does not pass the --verbose option to jasmin node" do
+          Open3.should_not_receive(:popen3).with(/--verbose/)
+          runner.run(some_paths, :verbose => false)
+        end
+      end
 
       it "returns IO object" do
         io_obj = double("io obj")

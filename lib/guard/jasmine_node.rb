@@ -9,7 +9,8 @@ module Guard
       :all_on_start     => true,
       :keep_failed      => true,
       :notify           => true,
-      :coffeescript     => true
+      :coffeescript     => true,
+      :verbose          => true
     }
     
     PATHS_FOR_ALL_SPECS = %w(spec)
