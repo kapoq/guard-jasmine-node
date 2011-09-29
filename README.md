@@ -59,7 +59,7 @@ Display growl/libnotify notifications.
 
 Load coffeescript and all execution of .coffee files.
 
-* `:verbose     # default => true`
+* `:verbose     # default => false`
 
 Execute jasmine-node in verbose mode
 
