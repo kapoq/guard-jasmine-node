@@ -37,7 +37,7 @@ module Guard
                     failing_paths + changed_paths
                   else
                     changed_paths
-                  end
+                  end.uniq
 
       run(run_paths)
       notify(:some)
