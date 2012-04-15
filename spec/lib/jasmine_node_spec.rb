@@ -181,7 +181,7 @@ describe Guard::JasmineNode do
     end
 
     context "when there are failing paths" do
-      let(:failing_paths) { %w(foo/bar zip/zap) }
+      let(:failing_paths) { %w(foo/bar zip/zap aaa/bbb) }
       let(:changed_paths) { %w(aaa/bbb ccc/ddd) }
       let(:all_paths)     { failing_paths + changed_paths }
       
@@ -194,8 +194,8 @@ describe Guard::JasmineNode do
           guard.options[:keep_failed] = true
         end
 
-        it "updates state with failing paths and the changed paths" do
-          state.should_receive(:update).with(all_paths, anything)
+        it "updates state with the union of failing paths and the changed paths" do
+          state.should_receive(:update).with(all_paths.uniq, anything)
           guard.run_on_change(changed_paths)
         end
       end
