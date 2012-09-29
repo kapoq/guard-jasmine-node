@@ -1,4 +1,4 @@
-Guard::JasmineNode ![travis-ci](https://secure.travis-ci.org/textgoeshere/guard-jasmine-node.png)
+Guard::JasmineNode [![travis-ci](https://secure.travis-ci.org/kapoq/guard-jasmine-node.png)](https://secure.travis-ci.org/kapoq/guard-jasmine-node)
 ==================
 
 JasmineNode guard automatically & intelligently executes jasmine node specs when files are modified.
