@@ -19,7 +19,9 @@ module Guard
         @run_paths = run_paths
         @io = Runner.run(@run_paths, options)
         @stdout     = @io[STDOUT]
+        @stderr     = @io[STDERR]
         @exitstatus = @io[THREAD].value rescue ERROR_CODE
+        @stderr.lines { |line| print line }
         @stdout.lines { |line| print line }
         close_io
         update_passed_and_fixed
