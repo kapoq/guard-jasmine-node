@@ -6,7 +6,7 @@ JasmineNode guard automatically & intelligently executes jasmine node specs when
 It works brilliantly with Node projects whereas [guard-jasmine](https://github.com/netzpirat/guard-jasmine)
 looks better for jasmine specs in the context of e.g. a Rails app.
 
-* Tested against Node 0.4, jasmine-node 1.0.10
+* Tested against Node 0.8.9, jasmine-node 1.0.26
 
 Requirements
 ------------
