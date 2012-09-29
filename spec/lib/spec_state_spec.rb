@@ -22,7 +22,7 @@ describe Guard::JasmineNode::SpecState do
     let(:io) { [
                 double("stdin",  :close => true),
                 double("stdout", :close => true, :lines => []),
-                double("stderr", :close => true),
+                double("stderr", :close => true, :lines => []),
                 double("thread", :value => 0)
                ] }
     let(:some_paths)   { %w(some paths) }
