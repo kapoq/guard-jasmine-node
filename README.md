@@ -1,4 +1,4 @@
-Guard::JasmineNode [![travis-ci](https://secure.travis-ci.org/kapoq/guard-jasmine-node.png)](https://secure.travis-ci.org/kapoq/guard-jasmine-node)
+Guard::JasmineNode ![travis-ci](https://secure.travis-ci.org/textgoeshere/guard-jasmine-node.png)
 ==================
 
 JasmineNode guard automatically & intelligently executes jasmine node specs when files are modified.
@@ -63,6 +63,9 @@ Load coffeescript and all execution of .coffee files.
 
 Execute jasmine-node in verbose mode
 
+* `:spec_paths  # default => [spec]`
+
+Array of paths containing all specs (supply a comma-separated list of paths to override the default)
 
 * `:jasmine_node_bin`
 

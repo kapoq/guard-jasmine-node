@@ -70,9 +70,11 @@ describe Guard::JasmineNode::Runner do
 
       context "when no message option is given" do
         context "and running all specs" do
+          let(:all_paths) { %w(foo bar zap) }
+          
           it "outputs message confirming all specs are being run" do
             Guard::UI.should_receive(:info).with("Running all specs", anything)
-            runner.run(Guard::JasmineNode::PATHS_FOR_ALL_SPECS)
+            runner.run(all_paths, spec_paths: all_paths)
           end
         end
 

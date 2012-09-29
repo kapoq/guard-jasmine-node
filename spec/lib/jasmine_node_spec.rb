@@ -40,6 +40,10 @@ describe Guard::JasmineNode do
         guard.options[:verbose].should be_false
       end
 
+      it "sets :spec_paths option an array including the spec directory" do
+        guard.options[:spec_paths].should =~ %w(spec)
+      end
+      
       it "is passing" do
         guard.should be_passing
       end
@@ -51,6 +55,9 @@ describe Guard::JasmineNode do
 
     context "when options are given" do
       let(:a_path) { "/foo/bar/jasmine-node" }
+      let(:some_paths) { %w(foo bar zap) }
+      let(:some_comma_separated_paths) { some_paths.join(",") }
+      
       let(:guard)  { Guard::JasmineNode.new([], {
                                               :jasmine_node_bin => a_path,
                                               :all_on_start     => false,
@@ -58,7 +65,8 @@ describe Guard::JasmineNode do
                                               :keep_failed      => false,
                                               :notify           => false,
                                               :coffeescript     => false,
-                                              :verbose          => true
+                                              :verbose          => true,
+                                              :spec_paths       => some_comma_separated_paths
                                             }) }
 
       it "sets the path to jasmine-node bin" do
@@ -87,6 +95,10 @@ describe Guard::JasmineNode do
       
       it "sets the :verbose option" do
         guard.options[:verbose].should be_true
+      end
+
+      it "sets the :spec_paths options to an array of paths given by a comma-separated string" do
+        guard.options[:spec_paths].should =~ some_paths
       end
     end
   end

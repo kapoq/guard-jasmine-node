@@ -10,15 +10,15 @@ module Guard
       :keep_failed      => true,
       :notify           => true,
       :coffeescript     => true,
-      :verbose          => false
+      :verbose          => false,
+      :spec_paths       => %w(spec)
     }
-    
-    PATHS_FOR_ALL_SPECS = %w(spec)
 
     autoload :Runner,    "guard/jasmine_node/runner"
     autoload :SpecState, "guard/jasmine_node/spec_state"
 
     def initialize(watchers = [], options = {})
+      options[:spec_paths] = options[:spec_paths].split(",") if options[:spec_paths].respond_to?(:split)
       super(watchers, DEFAULT_OPTIONS.merge(options))
       @state = SpecState.new
     end
@@ -28,7 +28,7 @@ module Guard
     end
 
     def run_all
-      run(PATHS_FOR_ALL_SPECS)
+      run(options[:spec_paths])
       notify(:all)
     end
 
