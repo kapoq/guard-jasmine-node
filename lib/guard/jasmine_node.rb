@@ -11,6 +11,7 @@ module Guard
       :notify           => true,
       :coffeescript     => true,
       :verbose          => false,
+      :forceexit        => false,
       :spec_paths       => %w(spec)
     }
 

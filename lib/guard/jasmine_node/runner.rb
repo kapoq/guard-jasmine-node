@@ -32,8 +32,9 @@ module Guard
 
       def self.command_line_options
         options = []
-        options << "--coffee" if @options[:coffeescript]
-        options << "--verbose" if @options[:verbose]
+        options << "--coffee"    if @options[:coffeescript]
+        options << "--verbose"   if @options[:verbose]
+        options << "--forceexit" if @options[:forceexit]
         options.join(" ")
       end
     end

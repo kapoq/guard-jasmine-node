@@ -59,6 +59,10 @@ Display growl/libnotify notifications.
 
 Load coffeescript and all execution of .coffee files.
 
+* `:forceexit        # default => false`
+
+Force jasmine-node process to quit after test (can help fix hanging specs)
+
 * `:verbose     # default => false`
 
 Execute jasmine-node in verbose mode

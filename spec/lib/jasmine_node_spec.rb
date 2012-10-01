@@ -66,6 +66,7 @@ describe Guard::JasmineNode do
                                               :notify           => false,
                                               :coffeescript     => false,
                                               :verbose          => true,
+                                              :forceexit        => true,
                                               :spec_paths       => some_comma_separated_paths
                                             }) }
 
@@ -99,6 +100,10 @@ describe Guard::JasmineNode do
 
       it "sets the :spec_paths options to an array of paths given by a comma-separated string" do
         guard.options[:spec_paths].should =~ some_paths
+      end
+
+      it "sets the :forceexit option" do
+        guard.options[:forceexit].should be_true
       end
     end
   end
