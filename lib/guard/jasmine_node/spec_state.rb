@@ -21,8 +21,8 @@ module Guard
         @stdout     = @io[STDOUT]
         @stderr     = @io[STDERR]
         @exitstatus = @io[THREAD].value rescue ERROR_CODE
-        @stderr.lines { |line| print line }
-        @stdout.lines { |line| print line }
+        @stderr.each_line { |line| print line }
+        @stdout.each_line { |line| print line }
         close_io
         update_passed_and_fixed
         update_failing_paths
