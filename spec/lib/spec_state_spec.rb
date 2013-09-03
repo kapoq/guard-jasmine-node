@@ -21,8 +21,8 @@ describe Guard::JasmineNode::SpecState do
   describe "#update" do
     let(:io) { [
                 double("stdin",  :close => true),
-                double("stdout", :close => true, :lines => []),
-                double("stderr", :close => true, :lines => []),
+                double("stdout", :close => true, :each_line => []),
+                double("stderr", :close => true, :each_line => []),
                 double("thread", :value => 0)
                ] }
     let(:some_paths)   { %w(some paths) }
