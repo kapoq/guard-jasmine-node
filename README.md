@@ -121,4 +121,4 @@ Testing
 Author
 ------
 
-[Dave Nolan](https://github.com/textgoeshere)
+[Dave Nolan](http://kapoq.com)
