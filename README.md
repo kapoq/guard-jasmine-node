@@ -116,6 +116,8 @@ TODO
 Testing
 -------
 
+Ruby >= 1.9 required.
+
     $ rake
 
 Author
