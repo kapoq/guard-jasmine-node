@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/kapoq/guard-jasmine-node"
   s.summary     = %q{Guard::JasmineNode automatically runs your Jasmine Node specs when files are modified}
   s.description = %q{}
+  s.license     = "MIT"
 
   s.rubyforge_project = "guard-jasmine-node"
 
